@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <plugins>
+    <plugin>
+      <name>couchapp-maven-plugin</name>
+      <prefix>couchapp</prefix>
+      <artifactId>couchapp-maven-plugin</artifactId>
+    </plugin>
+  </plugins>
+</metadata>
