@@ -1,37 +1,76 @@
-## Welcome to GitHub Pages
+## couchapp-maven-plugin
 
-You can use the [editor on GitHub](https://github.com/djBo/couchapp-maven-plugin/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.
+This maven plugin tries to replicate the functionality found in [CouchApp](https://github.com/couchapp/couchapp). The main reason for it, being cross-platform compatibility during builds.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The basic use-case is a small spring-boot application running as a proxy in front of CouchDB. 
 
-### Markdown
+### Goals
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The plugin only knows 2 goals, each named for their attached phase:
 
-```markdown
-Syntax highlighted code block
+- `package`<br>Takes your couchapp, and converts it into couchapp.json stored in the target folder
+- `deploy`<br>Connects to CouchDB, and uploads couchapp.json as your design document.
 
-# Header 1
-## Header 2
-### Header 3
+### Usage
 
-- Bulleted
-- List
+Add the following to your pom:
 
-1. Numbered
-2. List
+```xml
+	<packaging>couchapp</packaging>
 
-**Bold** and _Italic_ and `Code` text
+	<pluginRepositories>
+		<pluginRepository>
+			<id>couchapp-maven-plugin</id>
+			<url>https://raw.github.com/djBo/couchapp-maven-plugin/maven/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
-[Link](url) and ![Image](src)
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugin.couchapp</groupId>
+				<artifactId>couchapp-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					...
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Configuration
 
-### Jekyll Themes
+**debug** (default: _false_)<br>
+Enables debugging
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/djBo/couchapp-maven-plugin/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**debug.wire** (default: _false_)<br>
+Enables wire debugging
 
-### Support or Contact
+**source** (default: _${project.basedir}/src_)<br>
+The source directory of your couchapp
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+**target** (default: _${project.build.directory}_)<br>
+The build target directory
+
+**skip** (default: _false_)<br>
+Skips the plugin entirely
+
+**couchdb.scheme** (default: _http_)<br>
+CouchDB scheme (http/https)
+
+**couchdb.host** (default: _localhost_)<br>
+CouchDB hostname
+
+**couchdb.port** (default: _5984_)<br>
+CouchDB port
+
+**couchdb.db**<br>
+CouchDB database name
+
+**couchdb.user**<br>
+CouchDB username
+
+**couchdb.pass**<br>
+CouchDB password
