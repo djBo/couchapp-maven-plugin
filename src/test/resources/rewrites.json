@@ -1,0 +1,22 @@
+[
+  {
+  	"from" : "bar",
+  	"to" : "_view/bar"
+  },
+  {
+  	"from" : "logo",
+  	"to" : "_show/logo"
+  },
+  {
+  	"from" : "foobar",
+  	"to" : "_list/foo/bar"
+  },
+  {
+    "from" : "",
+    "to" : "index.html"
+  },
+  {
+  	"from" : "/*",
+  	"to" : "*"
+  }
+]
